@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  #开启注册中心路由功能
+      routes:
+        - id: payment_route
+          uri: lb://NACOS-PROVIDER
+          predicates:
+            - Path=/payment/**
+          # 熔断降级配置
+          filters:
+            - name: Hystrix
+              args:
+                name: payHystrix
+                fallbackUri: forward:/fallback
+        - id: auth_route
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/oauth/**,/user/**
+          # 熔断降级配置
+          filters:
+            - name: Hystrix  #需要注意的是：服务的 -name 要指定为 Hystrix ，否则需要自己手写一个 filter,继承 AbstractGatewayFilterFactory，实现里面的方法。
+              args:
+                name: authHystrix
+                fallbackUri: forward:/fallback
+
+# Hystrix 配置 default 是定义默认的熔断时间, payHystrix 是定义 payment_route 服务的熔断时间。
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000  # 全局熔断器6s超时
+    payHystrix:   # payment_route 服务 熔断超时
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000 # payHystrix熔断 时间 2秒

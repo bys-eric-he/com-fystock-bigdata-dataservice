@@ -1,0 +1,26 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: NACOS-GATEWAY  #当前服务名称
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.1.2.67:8848
+        namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
+      config:
+        server-addr: 10.1.2.67:8848 #Nacose服务地址
+        file-extension: yaml #这里我们从配置中心要获取的yaml格式的配置
+        #命名空间
+        namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
+        #读取的配置集合
+        ext-config: #Nacos中的dataid的组成格式及与SpringBoot配置文件中的属性对应关系：
+          - data-id: nacos-gateway.yaml   #${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            group: DEV_GROUP
+            refresh: true
+    sentinel: #限流组件Sentinel
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+
+
