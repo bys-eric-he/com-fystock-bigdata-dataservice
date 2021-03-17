@@ -26,4 +26,5 @@ spring:
     sentinel: #限流组件Sentinel
       transport:
         dashboard: 10.1.2.67:8480 #连接sentinel的dashboard
-        port: 8719
+        port: 8719  # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
+        heartbeat-interval-ms: 1000 # 心跳发送周期，默认值null 但在SimpleHttpHeartbeatSender会用默认值10秒
