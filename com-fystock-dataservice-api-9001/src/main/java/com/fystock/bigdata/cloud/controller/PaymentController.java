@@ -1,6 +1,7 @@
 package com.fystock.bigdata.cloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.fystock.bigdata.cloud.handler.SentinelFallBackHandler;
 import com.fystock.bigdata.cloud.service.PaymentService;
 import com.fystock.bigdata.cloud.entity.Payment;
 import com.fystock.bigdata.cloud.response.CommonResult;
@@ -27,7 +28,13 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    @SentinelResource("resource")
+    /**
+     * 通过Sentinel来控制流量的地方使用@SentinelResource注解定义需要被保护的方法
+     *
+     * @param payment
+     * @return
+     */
+    @SentinelResource(value = "paymentService", fallbackClass = SentinelFallBackHandler.class, fallback = "paymentFallbackHandler")
     @PostMapping("/create")
     @ApiOperation("创建支付记录")
     public CommonResult<Integer> create(@RequestBody Payment payment) {
@@ -48,7 +55,7 @@ public class PaymentController {
         CommonResult<Payment> result = null;
         try {
             //睡8秒，网关Hystrix3秒超时，会触发熔断降级操作
-            Thread.sleep(8000);
+            //Thread.sleep(8000);
             Payment payment = paymentService.getPaymentById(id);
             log.info("***查询结果：" + payment);
             if (payment != null) {

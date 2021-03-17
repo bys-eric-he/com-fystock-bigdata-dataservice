@@ -1,6 +1,7 @@
 package com.fystock.bigdata.cloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.fystock.bigdata.cloud.handler.SentinelFallBackHandler;
 import com.fystock.bigdata.cloud.service.PaymentService;
 import com.fystock.bigdata.cloud.entity.Payment;
 import com.fystock.bigdata.cloud.response.CommonResult;
@@ -27,7 +28,7 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    @SentinelResource("resource")
+    @SentinelResource(value = "paymentService", fallbackClass = SentinelFallBackHandler.class, fallback = "paymentFallbackHandler")
     @PostMapping("/create")
     @ApiOperation("创建支付记录")
     public CommonResult<Integer> create(@RequestBody Payment payment) {
