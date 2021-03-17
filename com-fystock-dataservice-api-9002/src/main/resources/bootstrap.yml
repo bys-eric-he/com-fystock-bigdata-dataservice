@@ -25,5 +25,5 @@ spring:
             refresh: true
     sentinel: #限流组件Sentinel
       transport:
-        dashboard: localhost:8080
+        dashboard: localhost:8480
         port: 8719
