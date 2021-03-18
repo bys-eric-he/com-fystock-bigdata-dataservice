@@ -1,6 +1,7 @@
 package com.fystock.bigdata.cloud.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.fystock.bigdata.cloud.handler.SentinelBlockHandler;
 import com.fystock.bigdata.cloud.handler.SentinelFallBackHandler;
 import com.fystock.bigdata.cloud.service.PaymentService;
 import com.fystock.bigdata.cloud.entity.Payment;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+
 @RestController
 @Slf4j
 @RequestMapping("/payment")
@@ -28,13 +30,6 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    /**
-     * 通过Sentinel来控制流量的地方使用@SentinelResource注解定义需要被保护的方法
-     *
-     * @param payment
-     * @return
-     */
-    @SentinelResource(value = "paymentService", fallbackClass = SentinelFallBackHandler.class, fallback = "paymentFallbackHandler")
     @PostMapping("/create")
     @ApiOperation("创建支付记录")
     public CommonResult<Integer> create(@RequestBody Payment payment) {
@@ -48,25 +43,31 @@ public class PaymentController {
         }
     }
 
+    /**
+     * fallback：若本接口出现未知异常，则调用fallback指定的接口。
+     * blockHandler：若本次访问被限流或服务降级，则调用blockHandler指定的接口。
+     * 使用 SpringCloud Alibaba 的Sentinel 时，在 Sentinel 控制台，进行流控规则 配置 时，
+     * 资源名 有两种填写方式：
+     * 1.请求的 URL (对应的 @GetMapping 、RequestMapping 的 value 值)
+     * 2.@SentinelResource 的 value 值
+     *
+     * @param id
+     * @return
+     */
+    @SentinelResource(value = "paymentService",
+            fallbackClass = SentinelFallBackHandler.class, fallback = "paymentFallbackHandler",
+            blockHandlerClass = SentinelBlockHandler.class, blockHandler = "exceptionHandler")
     @GetMapping("/get/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @ApiOperation("根据支付ID获取支付记录")
     public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
-        CommonResult<Payment> result = null;
-        try {
-            //睡8秒，网关Hystrix3秒超时，会触发熔断降级操作
-            //Thread.sleep(8000);
-            Payment payment = paymentService.getPaymentById(id);
-            log.info("***查询结果：" + payment);
-            if (payment != null) {
-                result = CommonResult.success(payment, "查询数据成功, 处理服务端口：" + serverPort);
-            } else {
-                result = CommonResult.failed("没有对应记录!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Payment payment = paymentService.getPaymentById(id);
+        log.info("***查询结果：" + payment);
+        if (payment != null) {
+            return CommonResult.success(payment, "查询数据成功, 处理服务端口：" + serverPort);
+        } else {
+            return CommonResult.failed("没有对应记录!");
         }
-        return result;
     }
 }
 
