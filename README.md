@@ -1,16 +1,20 @@
 基于SpringCloud-alibaba的oauth2分布式项目，
-使用nacos+gateway+spring security oauth2，认证服务器+资源服务器.也集成了logstash收集日志
+使用nacos+gateway+spring security oauth2+sentinel
+实现 认证服务器+资源服务器
+也集成了logstash收集日志
 
-Based on the oauth2 distributed project of springcloud-alibaba, 
-using nacos+gateway+spring security oauth2, authentication server + resource server.
+基于 OAuth2.0 distributed project of springcloud-alibaba, 
+使用 nacos+gateway+spring security oauth2+sentinel 
+实现 Authentication server + Resource server 分离.
 
-启动前安装好nacos，nacos做注册中心和配置中心，导入sql数据库。
+启动前安装好nacos，nacos做注册中心和配置中心，以及sentinel服务1.8.0版本。
+根据cloud_oauth2_db.sql创建数据库，插入数据。
 
-com-fystock-dataservice-oauth2   ：认证服务器
-com-fystock-dataservice-common ：公共类
-com-fystock-dataservice-gateway：网关
-com-fystock-dataservice-api-9001：资源服务器9001
-com-fystock-dataservice-api-9002：资源服务器9002
+1. com-fystock-dataservice-oauth2 认证服务器
+2. com-fystock-dataservice-common 公共类
+3. com-fystock-dataservice-gateway 网关
+4. com-fystock-dataservice-api-9001 资源服务器9001
+5. com-fystock-dataservice-api-9002 资源服务器9002
 
 授权码存储模式为jdbc(mysql),之前基于内存。导入项目下的cloud_oauth2_db.sql文件到数据库，数据库名称为cloud_oauth2_db.
 客户端配置存储也使用jdbc(mysql),之前也是基于内存，可以阅读代码还原为内存模式。
