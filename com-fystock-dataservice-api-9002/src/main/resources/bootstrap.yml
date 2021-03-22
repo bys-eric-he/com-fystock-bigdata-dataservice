@@ -8,10 +8,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 10.1.2.67:8848
+        server-addr: 10.1.2.219:8848
         namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
       config:
-        server-addr: 10.1.2.67:8848
+        server-addr: 10.1.2.219:8848
         file-extension: yaml
         #命名空间
         namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
@@ -25,7 +25,7 @@ spring:
             refresh: true
     sentinel: #限流组件Sentinel,向sentinel控制台注册本服务
       transport:
-        dashboard: 10.1.2.67:8480 #连接sentinel的dashboard
+        dashboard: 10.1.2.219:8480 #连接sentinel的dashboard
         port: 8723 # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
         heartbeat-interval-ms: 1000 # 心跳发送周期，默认值null 但在SimpleHttpHeartbeatSender会用默认值10秒
       eager: true #消取懒加载 默认false情况下Sentinel 会在客户端首次调用的时候进行初始化，开始向控制台发送心跳包。

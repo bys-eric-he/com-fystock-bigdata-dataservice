@@ -59,7 +59,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/**")
                 //定义 "/**" 所有的请求都需要拥有以下权限才可访问
-                .access("#oauth2.hasAnyScope('ROLE_ADMIN','ROLE_USER','ROLE_API')")
+                .access("#oauth2.hasAnyScope('ROLE_ADMIN','ROLE_USER','ROLE_API','ROLE_FYSTOCK')")
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

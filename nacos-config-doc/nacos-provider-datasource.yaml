@@ -2,6 +2,6 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource  # 当前数据源操作类型
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.1.2.150:3306/cloud_oauth2_db?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://10.1.2.219:3306/cloud_oauth2_db?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password: root

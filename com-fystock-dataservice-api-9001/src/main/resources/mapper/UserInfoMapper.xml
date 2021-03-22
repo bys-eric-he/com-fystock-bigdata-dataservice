@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fystock.bigdata.cloud.dao.UserInfoDao">
+    <resultMap id="BaseResultMap" type="com.fystock.bigdata.cloud.entity.AgeRatioUserInfo">
+        <id column="age" property="age" jdbcType="VARCHAR"/>
+        <id column="total_count" property="totalCount" jdbcType="INTEGER"/>
+        <id column="age_count" property="ageCount" jdbcType="INTEGER"/>
+        <id column="ratio" property="ratio" jdbcType="DECIMAL"/>
+        <id column="import_datetime" property="importDateTime" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findAllAgeRatioUser" resultMap="BaseResultMap">
+        SELECT age, total_count, age_count, ratio, import_datetime
+        FROM age_ratio_user_info arui;
+    </select>
+    <select id="findAllAgeRatioUserByImportDateTime" parameterType="string" resultMap="BaseResultMap">
+        SELECT age, total_count, age_count, ratio, import_datetime
+        FROM age_ratio_user_info
+        where import_datetime = #{importDateTime}
+    </select>
+</mapper>
