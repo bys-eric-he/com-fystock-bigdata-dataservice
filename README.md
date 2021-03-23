@@ -31,10 +31,15 @@ Authorization:选择Basic Auth,然后填入
     username:heyong
     password:123456
     scope:ROLE_ADMIN
+    
+请求地址：http://127.0.0.1:3344/oauth/token?grant_type=password&scope=ROLE_FYSTOCK&client_id=client-1&client_secret=secret&username=heyong&password=123456
+
 2.####----------------- 验证token------------------
 http://127.0.0.1:3344/oauth/check_token
 在表单中添加：
 token:xxxxx
+
+请求地址：http://127.0.0.1:3344/oauth/check_token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UtMSJdLCJ1c2VyX25hbWUiOiJoZXlvbmciLCJzY29wZSI6WyJST0xFX0ZZU1RPQ0siXSwiZXhwIjoxNjE2NDgwMzcxLCJhdXRob3JpdGllcyI6WyJGWVNUT0NLIl0sImp0aSI6ImE1OTU3NzEwLWNiNDctNGRkZS04NTJhLTM1NDRmMTY4NDU0ZCIsImNsaWVudF9pZCI6ImNsaWVudC0xIn0.dn8GNh4Ukce1lWkZoFi4ttaz6W9hCcuR4pe60vzTg4M
 
 3.#### ------------------获取接口数据---------------------
 http://127.0.0.1:3344/payment/get/6
@@ -56,3 +61,6 @@ grant_type ：refresh_token
 client_id：分配的客户端id
 client_secret：分配的客户端密码
 refresh_token：值为上一次请求返回值中refresh_token的值
+
+
+请求地址：http://127.0.0.1:3344/oauth/token?grant_type=refresh_token&client_id=client-1&client_secret=secret&refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzb3VyY2UtMSJdLCJ1c2VyX25hbWUiOiJoZXlvbmciLCJzY29wZSI6WyJST0xFX0ZZU1RPQ0siXSwiYXRpIjoiNzgxMGE4M2YtMjA0My00NGFmLWI5YzAtNTZkNTFhNTVmYzZkIiwiZXhwIjoxNjE2NzI5OTQzLCJhdXRob3JpdGllcyI6WyJGWVNUT0NLIl0sImp0aSI6ImIwYjRmNDI1LTVlMDMtNDE3Yi1hMDBhLWEzODk2MWJmMWJiZiIsImNsaWVudF9pZCI6ImNsaWVudC0xIn0.DeN8JOkoDPeL82wZEgxzmPjNHtmQluxhb8_KxLqkASM

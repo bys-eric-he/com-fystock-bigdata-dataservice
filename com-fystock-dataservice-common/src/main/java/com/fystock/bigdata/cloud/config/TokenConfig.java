@@ -9,6 +9,9 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class TokenConfig {
 
+    /**
+     * 密钥
+     */
     final private String SIGNING_KEY = "fystock-bigdata-2021";
 
     /**

@@ -33,7 +33,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                     user.getPassWord(),
                     AuthorityUtils.createAuthorityList(user.getRole()));
         } else {
-            throw new UsernameNotFoundException("用户[" + userName + "]不存在");
+            throw new UsernameNotFoundException("--->用户[" + userName + "]不存在!");
         }
     }
 }

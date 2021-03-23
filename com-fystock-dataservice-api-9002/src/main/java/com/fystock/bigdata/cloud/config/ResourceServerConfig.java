@@ -3,6 +3,7 @@ package com.fystock.bigdata.cloud.config;
 import com.fystock.bigdata.cloud.handler.AuthAccessDeniedHandler;
 import com.fystock.bigdata.cloud.handler.AuthenticationEntryPointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,12 +15,22 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.annotation.Resource;
 
+/**
+ * 资源服务器，管理那些url资源需要被认证和权限检查，资源服务器ResourceServerConfiguration会配置需要检查权限的url
+ *
+ * @author He.Yong
+ * @since 2021-03-23 17:08:09
+ */
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    public static final String RESOURCE_ID = "resource-1";
+    /**
+     * resourceId 用于分配给可授予的clientId
+     */
+    @Value("${fyoauth.resource-id}")
+    public String RESOURCE_ID;
 
     @Resource
     private TokenStore tokenStore;
@@ -45,7 +56,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .stateless(true); //stateless  标记以指示在这些资源上仅允许基于令牌的身份验证
     }
 
-
+    /**
+     * 在ResourceServerConfigurerAdapter配置需要token验证的资源
+     *
+     * @param http
+     * @throws Exception
+     */
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http

@@ -2,6 +2,7 @@ package com.fystock.bigdata.cloud.config;
 
 import com.fystock.bigdata.cloud.handler.WebResponseExceptionTranslatorHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -73,13 +74,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private WebResponseExceptionTranslatorHandler webResponseExceptionTranslatorHandler;
 
     /**
-     * accessToken 过期时间 2小时
+     * accessToken 过期时间 2小时  = 60 * 60 * 2
      */
-    private final int ACCESSTOKEN_VALIDITY_SECOND = 60 * 60 * 2;
+    @Value("${fyoauth.token.accesstoken-validity-second}")
+    private int ACCESSTOKEN_VALIDITY_SECOND;
     /**
-     * token刷新有效期 7天
+     * token刷新有效期 7天 = 60 * 60 * 24 * 7
      */
-    private final int REFRESHTOKEN_VALIDITY_SECOND = 60 * 60 * 24 * 7;
+    @Value("${fyoauth.token.refreshtoken-validity-second}")
+    private int REFRESHTOKEN_VALIDITY_SECOND;
 
     /**
      * 从数据库读取客户端信息
@@ -136,7 +139,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients)
             throws Exception {
-        clients.withClientDetails(clientDetailsService);//使用jdbc存储
+        //jdbc数据库模式
+        clients.withClientDetails(clientDetailsService);
+
+        /*
+        //内存模式
+        clients.inMemory().withClient("client-1")
+                .secret("secret")
+                .resourceIds("resource-1")
+                .authorizedGrantTypes("password")
+                .authorities("ROLE_ADMIN,ROLE_USER,ROLE_FYSTOCK")
+                .scopes("read", "write")
+                .accessTokenValiditySeconds(3600)
+                .refreshTokenValiditySeconds(50000);*/
     }
 
     /**
