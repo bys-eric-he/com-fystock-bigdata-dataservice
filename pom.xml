@@ -30,7 +30,7 @@
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <spring-cloud-dependencies.version>Hoxton.SR2</spring-cloud-dependencies.version>
-        <spring-boot-dependencies.version>2.2.2.RELEASE</spring-boot-dependencies.version>
+        <spring-boot-dependencies.version>2.3.3.RELEASE</spring-boot-dependencies.version>
         <spring-cloud-alibaba-dependencies.version>2.1.0.RELEASE</spring-cloud-alibaba-dependencies.version>
         <com-fystock-dataservice-common.version>1.0-SNAPSHOT</com-fystock-dataservice-common.version>
     </properties>

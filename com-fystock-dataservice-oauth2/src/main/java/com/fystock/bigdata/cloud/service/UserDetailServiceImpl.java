@@ -31,6 +31,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
             return new org.springframework.security.core.userdetails.User(
                     user.getUserName(),
                     user.getPassWord(),
+                    // 将用户表中配置的role角色信息放入authorities 中
+                    // 后续@PreAuthorize("hasAnyAuthority('FYSTOCK')")就会判断用户的authorities 中是否有该角色, 有则可以访问
                     AuthorityUtils.createAuthorityList(user.getRole()));
         } else {
             throw new UsernameNotFoundException("--->用户[" + userName + "]不存在!");

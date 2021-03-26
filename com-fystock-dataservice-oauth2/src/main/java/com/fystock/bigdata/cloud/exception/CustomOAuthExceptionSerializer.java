@@ -19,15 +19,15 @@ public class CustomOAuthExceptionSerializer  extends StdSerializer<CustomOAuthEx
     @Override
     public void serialize(CustomOAuthException value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         log.info("------认证失败------");
-        String body="";
-        if(value.getMessage().contains("Token has expired")) {
+        String body;
+        if (value.getMessage().contains("Token has expired")) {
             body = JSONUtil.toJsonStr(CommonResult.authenticationExpired(value.getMessage()));
-        }
-        if (value.getMessage().contains("用户名或密码错误")){
+        } else if (value.getMessage().contains("用户名或密码错误")) {
             body = JSONUtil.toJsonStr(CommonResult.authenticationFailed(value.getMessage()));
-        }
-        if(value.getMessage().contains("Cannot convert access token to JSON")){
+        } else if (value.getMessage().contains("Cannot convert access token to JSON")) {
             body = JSONUtil.toJsonStr(CommonResult.validateFailed(value.getMessage()));
+        } else {
+            body = JSONUtil.toJsonStr(CommonResult.failed(value.getMessage()));
         }
         jsonGenerator.writeRawValue(body);
     }

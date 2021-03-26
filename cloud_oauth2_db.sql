@@ -48,8 +48,8 @@ CREATE TABLE `oauth_client_details` (
 -- Records of oauth_client_details
 -- ----------------------------
 BEGIN;
-INSERT INTO `oauth_client_details` VALUES ('client-1', 'resource-1', '$2a$10$HHzdDxRXzOMPMIChuYBd1uuxLNOilKcs2jwv93TSPPm7qUNAC.8/W', 'ROLE_ADMIN,ROLE_USER,ROLE_FYSTOCK', 'client_credentials,password,authorization_code,implicit,refresh_token', NULL, NULL, 7200, 259200, NULL, CURRENT_TIMESTAMP(), 0, 0, 'false');
-INSERT INTO `oauth_client_details` VALUES ('client-2', 'resource-2', '$2a$10$1TmX6vpNSiu936ODFANJHu/n8hdefsP80Rnb7QFiKCyV99wOBceWO', 'ROLE_USER', 'client_credentials,password,authorization_code,implicit,refresh_token', NULL, NULL, 31536000, 2592000, NULL, CURRENT_TIMESTAMP(), 0, 0, 'false');
+INSERT INTO `oauth_client_details` VALUES ('client-1', 'resource-1', '$2a$10$HHzdDxRXzOMPMIChuYBd1uuxLNOilKcs2jwv93TSPPm7qUNAC.8/W', 'ROLE_FYSTOCK', 'client_credentials,password,authorization_code,implicit,refresh_token', NULL, NULL, 7200, 259200, NULL, CURRENT_TIMESTAMP(), 0, 0, 'false');
+INSERT INTO `oauth_client_details` VALUES ('client-2', 'resource-2', '$2a$10$HHzdDxRXzOMPMIChuYBd1uuxLNOilKcs2jwv93TSPPm7qUNAC.8/W', 'ROLE_ADMIN', 'client_credentials,password,authorization_code,implicit,refresh_token', NULL, NULL, 7200, 259200, NULL, CURRENT_TIMESTAMP(), 0, 0, 'false');
 COMMIT;
 
 -- ----------------------------
@@ -101,7 +101,8 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES (1, 'heyong', '$2a$10$WopDlEz.onEfPmU4OIu8EuHzWaXGB2G9XJXO.zik5Lv1sbZHUOI.q', 'ADMIN,FYSTOCK');
+INSERT INTO `user` VALUES (1, 'heyong', '$2a$10$WopDlEz.onEfPmU4OIu8EuHzWaXGB2G9XJXO.zik5Lv1sbZHUOI.q', 'FYSTOCK');
+INSERT INTO `user` VALUES (2, 'eric.he', '$2a$10$WopDlEz.onEfPmU4OIu8EuHzWaXGB2G9XJXO.zik5Lv1sbZHUOI.q', 'ADMIN');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

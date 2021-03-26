@@ -31,8 +31,16 @@ Authorization:选择Basic Auth,然后填入
     username:heyong
     password:123456
     scope:ROLE_ADMIN
+
     
 请求地址：http://127.0.0.1:3344/oauth/token?grant_type=password&scope=ROLE_FYSTOCK&client_id=client-1&client_secret=secret&username=heyong&password=123456
+参数说明：
+client_id：客户端准入标识。
+client_secret：客户端秘钥。
+grant_type：授权类型，填写password表示密码模式
+username：资源拥有者用户名。
+password：资源拥有者密码。
+
 
 2.####----------------- 验证token------------------
 http://127.0.0.1:3344/oauth/check_token
@@ -54,7 +62,7 @@ Token:xxxxx
 {"id":5,"serial":"CAP 500ML"}
  
 5.#### -------------------refreshToken--------------------
-post请求，跟请求token一样的url地址：http://localhost:9098/oauth/token
+post请求，跟请求token一样的url地址：http://localhost:3344/oauth/token
 post需要的参数：
 
 grant_type ：refresh_token

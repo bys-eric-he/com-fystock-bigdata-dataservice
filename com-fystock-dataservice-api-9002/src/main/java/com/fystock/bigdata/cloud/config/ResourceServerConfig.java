@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import javax.annotation.Resource;
 
 /**
+ * 创建资源服务器组件，使用@EnableResourceServer注解并扩展ResourceServerConfigurerAdapter类。
  * 资源服务器，管理那些url资源需要被认证和权限检查，资源服务器ResourceServerConfiguration会配置需要检查权限的url
  *
  * @author He.Yong

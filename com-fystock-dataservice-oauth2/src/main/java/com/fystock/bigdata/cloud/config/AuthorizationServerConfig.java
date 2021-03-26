@@ -125,6 +125,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(accessTokenConverter));
         service.setTokenEnhancer(tokenEnhancerChain);
 
+        //如果oauth_client_details中有配置，则以access_token_validity 和 refresh_token_validity 为准
         service.setAccessTokenValiditySeconds(ACCESSTOKEN_VALIDITY_SECOND); // 令牌默认有效期2小时
         service.setRefreshTokenValiditySeconds(REFRESHTOKEN_VALIDITY_SECOND); // 刷新令牌默认有效期7天
         return service;

@@ -5,7 +5,6 @@ import com.fystock.bigdata.cloud.handler.AuthenticationEntryPointHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -15,17 +14,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.annotation.Resource;
 
-/**
- * 创建资源服务器组件，使用@EnableResourceServer注解并扩展ResourceServerConfigurerAdapter类。
- * 资源服务器，管理那些url资源需要被认证和权限检查，资源服务器ResourceServerConfiguration会配置需要检查权限的url
- *
- * @author He.Yong
- * @since 2021-03-15 15:33:00
- */
 @Configuration
 @EnableResourceServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
     /**
      * resourceId 用于分配给可授予的clientId
      */
