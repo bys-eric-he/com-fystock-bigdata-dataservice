@@ -6,10 +6,21 @@ spring:
           enabled: true  #开启注册中心路由功能
       routes:
         # Payment API服务路由
-        - id: api_route
-          uri: lb://NACOS-PROVIDER
+        - id: api_data_route
+          uri: lb://NACOS-DATA-PROVIDER
           predicates:
-            - Path=/api/v1/**
+            - Path=/api/data/v1/**
+          # 熔断降级配置
+          filters:
+            - name: Hystrix
+              args:
+                name: payHystrix
+                fallbackUri: forward:/fallback
+        # Payment API服务路由
+        - id: api_market_route
+          uri: lb://NACOS-MARKET-PROVIDER
+          predicates:
+            - Path=/api/market/v1/**
           # 熔断降级配置
           filters:
             - name: Hystrix

@@ -42,8 +42,8 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("富元环球数据服务API 1.0")
-                .description("提供大数据接口服务")
-                .termsOfServiceUrl("http://localhost:9001/swagger-ui.html")
+                .description("提供行情数据接口服务")
+                .termsOfServiceUrl("http://localhost:9003/swagger-ui.html")
                 .contact(new Contact("何涌", "", "heyong@fuyuanhk.com"))
                 .version("1.0")
                 .build();

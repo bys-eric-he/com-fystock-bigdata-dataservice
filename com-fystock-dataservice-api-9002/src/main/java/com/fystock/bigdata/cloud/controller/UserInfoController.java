@@ -18,8 +18,8 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Api(value = "/api/v1/user_info", tags = "注册用户数据分析统计结果")
-@RequestMapping(value = "/api/v1/user_info")
+@Api(value = "/api/data/v1/user_info", tags = "注册用户数据分析统计结果")
+@RequestMapping(value = "/api/data/v1/user_info")
 public class UserInfoController {
 
     @Value("${server.port}")

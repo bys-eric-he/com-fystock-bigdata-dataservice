@@ -19,8 +19,8 @@ import javax.annotation.Resource;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/v1/payment")
-@Api(value = "/api/v1/payment", tags = "支付信息")
+@RequestMapping("/api/data/v1/payment")
+@Api(value = "/api/data/v1/payment", tags = "支付信息")
 @RefreshScope
 public class PaymentController {
 

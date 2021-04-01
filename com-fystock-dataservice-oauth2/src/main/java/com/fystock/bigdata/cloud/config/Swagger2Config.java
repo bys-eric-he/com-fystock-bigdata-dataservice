@@ -44,7 +44,7 @@ public class Swagger2Config {
                 .title("富元环球数据OAuth2.0认证中心API 1.0")
                 .description("提供大数据接口身份统一认证服务")
                 .termsOfServiceUrl("http://localhost:9999/swagger-ui.html")
-                .contact(new Contact("何涌", "", "heyong@9fstock.com"))
+                .contact(new Contact("何涌", "", "heyong@fuyuanhk.com"))
                 .version("1.0")
                 .build();
     }

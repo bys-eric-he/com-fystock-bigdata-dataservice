@@ -4,7 +4,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: NACOS-PROVIDER
+    name: NACOS-DATA-PROVIDER
   cloud:
     nacos:
       discovery:
@@ -17,10 +17,10 @@ spring:
         namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
         #读取的配置集合
         ext-config:
-          - data-id: nacos-provider-mybatis.yaml
+          - data-id: nacos-data-provider-mybatis.yaml
             group: DEV_GROUP
             refresh: true
-          - data-id: nacos-provider-datasource.yaml
+          - data-id: nacos-data-provider-datasource.yaml
             group: DEV_GROUP
             refresh: true
     sentinel: #限流组件Sentinel,向sentinel控制台注册本服务

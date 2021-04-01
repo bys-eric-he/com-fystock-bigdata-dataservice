@@ -1,10 +1,10 @@
 server:
-  port: 9001
+  port: 9003
 spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: NACOS-DATA-PROVIDER
+    name: NACOS-MARKET-PROVIDER
   cloud:
     nacos:
       discovery:
@@ -17,15 +17,15 @@ spring:
         namespace: public #public命名空间是nacos的保留空间，默认namespace对应ID为空。即不设置命名空间时候，默认的注册都在public空间下
         #读取的配置集合
         ext-config:
-          - data-id: nacos-data-provider-mybatis.yaml
+          - data-id: nacos-market-provider-mybatis.yaml
             group: DEV_GROUP
             refresh: true
-          - data-id: nacos-data-provider-datasource.yaml
+          - data-id: nacos-market-provider-datasource.yaml
             group: DEV_GROUP
             refresh: true
     sentinel: #限流组件Sentinel,向sentinel控制台注册本服务
       transport:
         dashboard: 10.1.2.41:8480 #连接sentinel的dashboard
-        port: 8722  # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
+        port: 8724 # 如不设置，会自动从8719开始扫描，依次+1，直到找到未被占用的端口
         heartbeat-interval-ms: 1000 # 心跳发送周期，默认值null 但在SimpleHttpHeartbeatSender会用默认值10秒
       eager: true #消取懒加载 默认false情况下Sentinel 会在客户端首次调用的时候进行初始化，开始向控制台发送心跳包。
